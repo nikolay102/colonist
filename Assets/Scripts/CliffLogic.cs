@@ -28,15 +28,10 @@ namespace DefaultNamespace
             human.Freezed = false;
             human.IsWithWeapon = false;
         }
-
-        public void StopCliffAnimation()
-        {
-            isAnimationEnded = true;
-        }
         
         private void OnTriggerEnter2D(Collider2D collider2D)
         {
-            if (human.Head.headON) return;
+            if (human.Head.headON || !human.Feet.IsGrounded) return;
 
             var left = collider2D.transform.position.x - transform.position.x < 0;
 

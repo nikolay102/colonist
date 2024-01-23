@@ -9,12 +9,22 @@ public class Feet : MonoBehaviour
 
     private bool isGround;
 
+    private int CollisionsCount;
+
+    private void Update()
+    {
+        Debug.Log(CollisionsCount);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isGround = true;
+        CollisionsCount += 1;
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isGround = false;
+        CollisionsCount -= 1;
+        if(CollisionsCount == 0)
+            isGround = false;
     }
 }
