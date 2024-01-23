@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class head : MonoBehaviour
+public class Head : MonoBehaviour
 
 {
     [SerializeField] private Animator animator;
@@ -29,7 +29,7 @@ public class head : MonoBehaviour
         {
             istriggered = true;
             animator.SetBool("head", true);
-            Debug.Log("голова задела");
+            Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
             headON= true;
 
         }
@@ -38,7 +38,7 @@ public class head : MonoBehaviour
     {
         istriggered= false;
         animator.SetBool("head", false);
-        Debug.Log("Чел бобнулся");
+        Debug.Log("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         headON= false;
     }
 }
