@@ -9,7 +9,7 @@ namespace DefaultNamespace
         [SerializeField] private Transform williamTransform;
         [SerializeField] private Animator animator;
         private Human human;
-        private bool istriggered;
+        private bool isAnimationEnded;
 
         void Start()
         {
@@ -19,23 +19,29 @@ namespace DefaultNamespace
 
         private IEnumerator CliffingCoroutine(bool isLeft)
         {
-            yield return new WaitForSeconds(0.4f);
-            istriggered = false;
-            yield return null;
+            human.Freezed = true;
+            animator.SetTrigger("Cliff");
+            yield return new WaitForSeconds(0.85f);
             williamTransform.transform.position = new Vector2(
                 williamTransform.transform.position.x + (isLeft ? -0.8f : 0.8f),
                 williamTransform.transform.position.y + 1f);
-            animator.SetBool("legs", false);
-            human.Feet.IsGrounded = true;
+            human.Freezed = false;
+            human.IsWithWeapon = false;
         }
 
+        public void StopCliffAnimation()
+        {
+            isAnimationEnded = true;
+        }
+        
         private void OnTriggerEnter2D(Collider2D collider2D)
         {
             if (human.Head.headON) return;
 
             var left = collider2D.transform.position.x - transform.position.x < 0;
 
-            animator.SetBool("legs", true);
+            isAnimationEnded = false;
+            
             StartCoroutine(CliffingCoroutine(left));
         }
     }

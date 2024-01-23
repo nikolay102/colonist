@@ -17,7 +17,7 @@ public class legs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator.SetBool("legs", false);
+        animator.SetBool("Clidd", false);
         human = williamTransform.GetComponent<Human>();
     }
 

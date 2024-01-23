@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class Human : MonoBehaviour
@@ -10,19 +11,21 @@ public class Human : MonoBehaviour
     [SerializeField] private float jumpForce = 15f;
     [SerializeField] private Head head;
 
-    private bool getReady;
+    public bool IsWithWeapon { get; set; }
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
 
     public Feet Feet => feet;
 
+    
+    public bool Freezed { get; set; }
+    
 
     public Head Head
     {
         get { return head; }
     }
-
-    public static Human Instance { get; set; }
+    
     private Animator animator;
 
     public int Lives
@@ -44,18 +47,21 @@ public class Human : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        animator.SetBool("Active", true);
     }
 
     private void Update()
 
     {
+        if (Freezed) 
+            return;
         if (Input.GetButton("Horizontal"))
             Run();
         else
-            animator.SetBool("IsRunnung", false);
+            animator.SetBool("IsRunning", false);
+        
         if (feet.IsGrounded && Input.GetKeyDown(KeyCode.Space))
             Jump();
-        animator.SetBool("onground", feet.IsGrounded);
         GetReady();
     }
 
@@ -68,9 +74,13 @@ public class Human : MonoBehaviour
     {
         if (Input.GetKeyDown("q"))
         {
-            Debug.Log("��");
-            getReady = !getReady;
-            animator.SetBool("getready", getReady);
+            IsWithWeapon = !IsWithWeapon;
+            animator.SetTrigger(IsWithWeapon ? "TakeWeapon" : "HideWeapon");
+            animator.SetBool("ReadyOrNot", IsWithWeapon);
+        }
+        if (Input.GetKeyDown("e"))
+        {
+            animator.SetTrigger("Cliff");
         }
     }
 
@@ -79,7 +89,7 @@ public class Human : MonoBehaviour
         Vector3 dir = transform.right * Input.GetAxis("Horizontal");
         transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed * Time.deltaTime);
         sprite.flipX = dir.x < 0.0f;
-        animator.SetBool("IsRunnung", true);
+        animator.SetBool("IsRunning", true);
     }
 
     private void FixedUpdate()
@@ -90,7 +100,7 @@ public class Human : MonoBehaviour
     {
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
 
-        animator.SetBool("IsRunnung", false);
+        animator.SetTrigger("Jump");
     }
 
 

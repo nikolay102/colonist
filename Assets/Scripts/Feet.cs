@@ -1,18 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Feet : MonoBehaviour
 {
-    public bool IsGrounded { get; set; }
-    
-    
+    public bool IsGrounded => isGround;
+
+    private bool isGround;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        IsGrounded = true;
+        isGround = true;
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        IsGrounded = false;
+        isGround = false;
     }
 }

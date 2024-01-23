@@ -14,22 +14,11 @@ public class Head : MonoBehaviour
     {
         headON = false;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        CheckHead();
-    }
-    void CheckHead()
-    {
-        animator.SetBool("head", istriggered);
-    }
+    
     private void OnTriggerEnter2D(Collider2D collider2d)
     {
         {
             istriggered = true;
-            animator.SetBool("head", true);
-            Debug.Log("������ ������");
             headON= true;
 
         }
@@ -37,8 +26,6 @@ public class Head : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         istriggered= false;
-        animator.SetBool("head", false);
-        Debug.Log("��� ��������");
         headON= false;
     }
 }
