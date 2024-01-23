@@ -78,10 +78,6 @@ public class Human : MonoBehaviour
             animator.SetTrigger(IsWithWeapon ? "TakeWeapon" : "HideWeapon");
             animator.SetBool("ReadyOrNot", IsWithWeapon);
         }
-        if (Input.GetKeyDown("e"))
-        {
-            animator.SetTrigger("Cliff");
-        }
     }
 
     private void Run()
