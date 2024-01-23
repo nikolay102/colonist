@@ -11,14 +11,14 @@ public class rightleg : MonoBehaviour
     [SerializeField] private Animator animator;
     public static rightleg Instance;
     private bool istriggered;
-    private william William;
+    private Human human;
 
 
     // Start is called before the first frame update
     void Start()
     {
         animator.SetBool("rightlegs", false);
-        William= williamTransform.GetComponent<william>();
+        human= williamTransform.GetComponent<Human>();
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class rightleg : MonoBehaviour
     }
     private IEnumerator moving()
     {
-        if (William.Head.headON == false)
+        if (human.Head.headON == false)
         {
         yield return new WaitForSeconds(0.5f);
         istriggered = false;
@@ -52,12 +52,12 @@ public class rightleg : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (William.Head.headON == false)
+        if (human.Head.headON == false)
         {
         istriggered = true;
         animator.SetBool("rightlegs", true);
         StartCoroutine(moving());
-        Debug.Log("ноги задели");
+        Debug.Log("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
 
         }
             
