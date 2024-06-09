@@ -14,7 +14,7 @@ public class Human : MonoBehaviour
     public bool IsWithWeapon { get; set; }
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
-
+    
     public Feet Feet => feet;
 
     
@@ -41,7 +41,10 @@ public class Human : MonoBehaviour
         }
     }
 
-
+    private void Start()
+    {
+     
+    }
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -62,7 +65,12 @@ public class Human : MonoBehaviour
         
         if (feet.IsGrounded && Input.GetKeyDown(KeyCode.Space))
             Jump();
+        if (feet.isGround == false)
+            animator.SetBool("IsGrounded", false);
+        else
+            animator.SetBool("IsGrounded", true);
         GetReady();
+        
     }
 
     public void GetDamage()
@@ -95,7 +103,7 @@ public class Human : MonoBehaviour
     private void Jump()
     {
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-
+        
         animator.SetTrigger("Jump");
     }
 

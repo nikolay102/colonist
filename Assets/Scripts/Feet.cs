@@ -7,8 +7,8 @@ public class Feet : MonoBehaviour
 {
     public bool IsGrounded => isGround;
 
-    private bool isGround;
-
+    public bool isGround;
+   
     private int сollisionsCount;
 
     private void Update()
@@ -20,11 +20,13 @@ public class Feet : MonoBehaviour
     {
         isGround = true;
         сollisionsCount += 1;
+        
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
         сollisionsCount -= 1;
         if(сollisionsCount == 0)
             isGround = false;
+        
     }
 }

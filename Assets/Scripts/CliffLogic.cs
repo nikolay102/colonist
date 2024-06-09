@@ -9,7 +9,7 @@ namespace DefaultNamespace
         [SerializeField] private Transform williamTransform;
         [SerializeField] private Animator animator;
         private Human human;
-        private bool isAnimationEnded;
+        
 
         void Start()
         {
@@ -21,7 +21,7 @@ namespace DefaultNamespace
         {
             human.Freezed = true;
             animator.SetTrigger("Cliff");
-            yield return new WaitForSeconds(0.85f);
+            yield return new WaitForSeconds(0.85f / 1.5f);
             williamTransform.transform.position = new Vector2(
                 williamTransform.transform.position.x + (isLeft ? -0.8f : 0.8f),
                 williamTransform.transform.position.y + 1f);
@@ -35,7 +35,7 @@ namespace DefaultNamespace
 
             var left = collider2D.transform.position.x - transform.position.x < 0;
 
-            isAnimationEnded = false;
+            
             
             StartCoroutine(CliffingCoroutine(left));
         }
